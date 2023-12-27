@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="QuizResult.css">
+    <title>Quiz Result</title>
+</head>
+<body>
+    <!-- Login Section -->
+    <div id="loginSection">
+        <h1>Login to View Quiz Result</h1>
+        <form>
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+            <label for="pin">PIN:</label>
+            <input type="password" id="pin" required>
+            <button type="button" onclick="login()">Login</button>
+        </form>
+    </div>
+
+    <!-- Quiz Result Section -->
+    <div id="quizResultSection" style="display: none;">
+        <h1>Quiz Result</h1>
+        <!-- Display Quiz Result Details Here -->
+        <p id="quizResultDetails"></p>
+    </div>
+
+    <!-- Menu Options -->
+    <div class="MenuOptions">
+        <a href="index.html">Quiz</a>
+        <a href="questioneditor.html">Quiz Editor</a>
+        <a href="QuizResult.html">Quiz Result</a>
+    </div>
+
+    <script src="QuizResult.js"></script>
+</body>
+</html>

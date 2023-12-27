@@ -135,9 +135,10 @@ button {
 .MenuOptions a {
     color: white;
     text-decoration: none;
-    margin: 10px;
-    padding: 10px;
-    display: inline-block; /* Ensures that padding and margin work properly */
+    margin: 0 10px;
+    padding: 5px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
 }
 
 .MenuOptions a:hover {

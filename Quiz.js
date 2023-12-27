@@ -35,9 +35,31 @@ function startQuiz() {
     sessionStorage.setItem('username', username);
     sessionStorage.setItem('rollNumber', rollNumber);
 
+    // Shuffle questions and options
+    shuffleQuestions();
+
     quizStartTime = new Date();
     currentQuestion++;
     showQuestion();
+}
+
+function shuffleQuestions() {
+    // Shuffle questions array
+    questions = shuffleArray(questions);
+
+    // Shuffle options for each question
+    questions.forEach(question => {
+        question.options = shuffleArray(question.options);
+    });
+}
+
+function shuffleArray(array) {
+    // Fisher-Yates shuffle algorithm
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
 
 
@@ -55,7 +77,7 @@ function showQuestion() {
 
     quizContainer.innerHTML = `
         <div id="timeDisplay"></div>
-        <h2>${questionData.question}</h2>
+        <h2>Question ${currentQuestion}: ${questionData.question}</h2>
         <div class="options">
             ${questionData.options.map((option, index) => `
                 <label>
@@ -70,6 +92,7 @@ function showQuestion() {
     // Update the time display every second
     updateTimerDisplay();
 }
+
 
 function updateTimerDisplay() {
     const timeDisplay = document.getElementById('timeDisplay');
