@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <div id="quiz">
+            <!-- Questions and options go here -->
+        </div>
+        <div id="result" class="hidden">
+            <!-- Result page content goes here -->
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code for the start of the quiz goes here
+
+        // Display input fields for username and roll number before the quiz starts
+        document.getElementById('quiz').innerHTML = `
+            <form id="startForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" required />
+                <label for="rollNumber">Roll Number:</label>
+                <input type="text" id="rollNumber" required />
+                <button type="button" onclick="startQuiz()">Start Quiz</button>
+            </form>
+        `;
+    </script>
+
+    <script src="questions.js"></script>
+    <script src="quiz.js"></script>
+</body>
+</html>

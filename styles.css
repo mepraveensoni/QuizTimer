@@ -1,0 +1,127 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(45deg, #510a2b, #912b66, #88227f, #962396);
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.quiz-container {
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: rgba(77, 6, 67, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.hidden {
+    display: none;
+}
+
+#quiz {
+    text-align: left;
+}
+
+#quiz h2 {
+    margin-bottom: 10px;
+}
+
+#quiz .options {
+    display: flex;
+    flex-direction: column;
+}
+
+#quiz .options label {
+    margin-bottom: 10px;
+}
+
+#quiz button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#result {
+    text-align: center;
+}
+
+#result h2 {
+    margin-bottom: 20px;
+}
+
+#result .review-link {
+    color: #3498db;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#result .review-container {
+    display: none;
+    margin-top: 20px;
+}
+
+#result .review-container .question {
+    color: black;
+    font-weight: bold;
+}
+
+#result .review-container .correct {
+    color: green;
+}
+
+#result .review-container .wrong {
+    color: red;
+}
+
+#result .review-container .explanation {
+    margin-top: 10px;
+}
+
+#result button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#startForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+button {
+    margin-top: 10px;
+}
