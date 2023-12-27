@@ -1,0 +1,160 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(45deg, #badbf1, #a9d5f2, #95ccf1, #153042);
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
+    color: rgb(0, 0, 0);
+    display: block;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+h1, h2 {
+    text-align: center;
+    color: #121b1f;
+}
+
+#loginh2 {
+    text-align: center;
+}
+
+.login-container {
+    width: 80%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: rgba(3, 38, 59, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(154, 177, 201, 0.3);
+    color: white;
+    margin: auto; /* Center the container horizontally */
+}
+
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 12px;
+    color: #2d0031;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:active {
+    background-color: #3c9039;
+}
+
+button:not(:last-child) {
+    margin-right: 10px;
+}
+
+/* Styles for the question editor table */
+#questionTable {
+    width: 80%;
+    margin: 0 auto 30px; /* Added margin to the left and right, centered the table */
+    border-collapse: collapse;
+}
+
+#questionTable th, #questionTable td {
+    border: 1px solid #91d1fc;
+    padding: 12px;
+    text-align: left;
+}
+
+#questionTable th {
+    background-color: #03224f;
+    color: #fff;
+}
+
+#questionTable tbody tr:hover {
+    background-color: #87d8fb;
+}
+
+#questionTable button {
+    margin-right: 8px;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+#usernamelabel, #pinlabel, h2 {
+    color: white;
+}
+
+/* Specific styles for the Question Editor section */
+#questionEditorSection {
+    text-align: center; /* Center the content in the Question Editor section */
+}
+
+#questionEditorSection h1 {
+    color: #f0f9fc;
+    margin-bottom: 20px;
+}
+
+#questionForm label {
+    margin-bottom: 10px;
+}
+
+/* Menu Options */
+.MenuOptions {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.MenuOptions a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 10px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.MenuOptions a:hover {
+    background-color: #555;
+}

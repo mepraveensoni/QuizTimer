@@ -27,7 +27,7 @@ function startQuiz() {
 
     // Check if both username and roll number are provided
     if (username.trim() === '' || rollNumber.trim() === '') {
-        alert('Please enter both your username and roll number before starting the quiz.');
+        //alert('Please enter both your username and roll number before starting the quiz.');
         return;
     }
 
