@@ -66,7 +66,7 @@ function updateQuestionTable() {
         // Add an action to update or delete the question
         const updateButton = document.createElement('button');
         updateButton.innerText = 'Update';
-        updateButton.onclick = function() {
+        updateButton.onclick = function () {
             // Set the selected question index in local storage
             localStorage.setItem('selectedQuestionIndex', index);
             // Update the form fields with the selected question's data
@@ -79,7 +79,7 @@ function updateQuestionTable() {
 
         const deleteButton = document.createElement('button');
         deleteButton.innerText = 'Delete';
-        deleteButton.onclick = function() {
+        deleteButton.onclick = function () {
             // Delete the question and refresh the table
             questions.splice(index, 1);
             localStorage.setItem('questions', JSON.stringify(questions));
@@ -189,6 +189,15 @@ if (typeof window.questions === 'undefined') {
 
     // Initialize questions variable if not already defined
     window.questions = JSON.parse(localStorage.getItem('questions')) || [];
+}
+
+function logout() {
+    // Clear login data
+    localStorage.removeItem('quizLogin');
+
+    // Show the login section and hide the quiz report section
+    document.getElementById('loginSection').style.display = 'block';
+    document.getElementById('questionEditorSection').style.display = 'none';
 }
 
 // Call the function to initially populate the table

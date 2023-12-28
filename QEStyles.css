@@ -16,15 +16,18 @@ body {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
 }
 
-h1, h2 {
+h1,
+h2 {
     text-align: center;
     color: #121b1f;
 }
@@ -35,13 +38,15 @@ h1, h2 {
 
 .login-container {
     width: 80%;
-    max-width: 400px;
+    max-width: 300px;
     padding: 20px;
     background-color: rgba(3, 38, 59, 0.9);
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(154, 177, 201, 0.3);
     color: white;
-    margin: auto; /* Center the container horizontally */
+    margin: auto;
+    /* Center the container horizontally */
+    scale: 90%;
 }
 
 form {
@@ -96,11 +101,13 @@ button:not(:last-child) {
 /* Styles for the question editor table */
 #questionTable {
     width: 80%;
-    margin: 0 auto 30px; /* Added margin to the left and right, centered the table */
+    margin: 0 auto 30px;
+    /* Added margin to the left and right, centered the table */
     border-collapse: collapse;
 }
 
-#questionTable th, #questionTable td {
+#questionTable th,
+#questionTable td {
     border: 1px solid #91d1fc;
     padding: 12px;
     text-align: left;
@@ -121,13 +128,16 @@ button:not(:last-child) {
     margin-bottom: 8px;
 }
 
-#usernamelabel, #pinlabel, h2 {
+#usernamelabel,
+#pinlabel,
+h2 {
     color: white;
 }
 
 /* Specific styles for the Question Editor section */
 #questionEditorSection {
-    text-align: center; /* Center the content in the Question Editor section */
+    text-align: center;
+    /* Center the content in the Question Editor section */
 }
 
 #questionEditorSection h1 {
@@ -156,5 +166,6 @@ button:not(:last-child) {
 }
 
 .MenuOptions a:hover {
-    background-color: #555; /* Add a background color on hover if desired */
+    color: #0c0101;
+    scale: 105%;
 }

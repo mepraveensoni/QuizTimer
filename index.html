@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz App</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="MenuOptions">
         <a href="index.html">Quiz</a>
         <a href="questioneditor.html">Quiz Editor</a>
-        <a href="QuizResult.html">Quiz Result</a>
+        <a href="QuizReport.html">Quiz Result</a>
     </div>
     <div class="quiz-container">
         <div id="quiz">
@@ -21,9 +23,11 @@
         </div>
     </div>
 
+    <script src="questions.js"></script>
+    <script src="QuizReport.js"></script>
+    <script src="Quiz.js"></script>
     <script>
         // JavaScript code for the start of the quiz goes here
-
         // Display input fields for username and roll number before the quiz starts
         document.getElementById('quiz').innerHTML = `
             <form id="startForm">
@@ -35,8 +39,6 @@
             </form>
         `;
     </script>
-
-    <script src="questions.js"></script>
-    <script src="quiz.js"></script>
 </body>
+
 </html>

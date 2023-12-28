@@ -16,9 +16,11 @@ body {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
@@ -142,5 +144,7 @@ button {
 }
 
 .MenuOptions a:hover {
-    background-color: #555; /* Add a background color on hover if desired */
+    color: #0c0101;
+    scale: 105%;
 }
+

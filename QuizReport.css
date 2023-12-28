@@ -1,0 +1,134 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(45deg, #badbf1, #a9d5f2, #95ccf1, #88c9f5);
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
+    color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.center-container {
+    text-align: center;
+}
+
+h1 {
+    color: #121b1f;
+}
+
+#loginSection {
+    max-width: 400px;
+    margin: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    color: #2d0031;
+    padding: 20px;
+    scale: 90%;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 12px;
+    color: #2d0031;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:active {
+    background-color: #3c9039;
+}
+
+.MenuOptions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.MenuOptions a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 5px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.MenuOptions a:hover {
+    color: #0c0101;
+    scale: 105%;
+}
+
+#quizReportTable {
+    max-width: 800px;
+    margin: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    color: #2d0031;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}

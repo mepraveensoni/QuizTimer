@@ -5,66 +5,116 @@ const resultContainer = document.getElementById('result');
 
 let quizStartTime;
 let quizEndTime;
+let timerInterval;
+let currentUsername;
+let currentRollNumber;
 
-let quizStarted = false;
-
-function showStartPage() {
-    // Display input fields for username and roll number before the quiz starts
-    quizContainer.innerHTML = `
-        <form id="startForm">
-            <label for="username">Username:</label>
-            <input type="text" id="username" required />
-            <label for="rollNumber">Roll Number:</label>
-            <input type="text" id="rollNumber" required />
-            <button type="button" onclick="startQuiz()">Start Quiz</button>
-        </form>
-    `;
-}
 
 function startQuiz() {
-    const username = document.getElementById('username').value;
-    const rollNumber = document.getElementById('rollNumber').value;
+    const usernameInput = document.getElementById('username');
+    const rollNumberInput = document.getElementById('rollNumber');
 
-    // Check if both username and roll number are provided
-    if (username.trim() === '' || rollNumber.trim() === '') {
-        //alert('Please enter both your username and roll number before starting the quiz.');
+    if (!usernameInput || !rollNumberInput) {
+        console.error('Username or Roll Number input not found.');
         return;
     }
 
-    // Store the username and roll number for later use
-    sessionStorage.setItem('username', username);
-    sessionStorage.setItem('rollNumber', rollNumber);
+    const username = usernameInput.value;
+    const rollNumber = rollNumberInput.value;
 
-    // Shuffle questions and options
-    shuffleQuestions();
-
-    quizStartTime = new Date();
-    currentQuestion++;
-    showQuestion();
-}
-
-function shuffleQuestions() {
-    // Shuffle questions array
-    questions = shuffleArray(questions);
-
-    // Shuffle options for each question
-    questions.forEach(question => {
-        question.options = shuffleArray(question.options);
-    });
-}
-
-function shuffleArray(array) {
-    // Fisher-Yates shuffle algorithm
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+    // Check if both username and roll number are provided
+    if (username.trim() === '' || rollNumber.trim() === '') {
+        // alert('Please enter both your username and roll number before starting the quiz.');
+        return;
     }
-    return array;
+
+    // Store the username and roll number in localStorage and variables
+    localStorage.setItem('username', username);
+    localStorage.setItem('rollNumber', rollNumber);
+    currentUsername = username;
+    currentRollNumber = rollNumber;
+
+    // Check if the quiz is already in progress
+    if (!checkQuizState()) {
+        // If not, shuffle questions and options
+        shuffleQuestions();
+
+        quizStartTime = new Date();
+        currentQuestion++;
+        showQuestion();
+    }
+}
+
+function checkQuizState() {
+    const storedQuestion = localStorage.getItem('currentQuestion');
+    const storedScore = localStorage.getItem('score');
+    const storedTimeTaken = localStorage.getItem('timeTaken');
+    const storedUsername = localStorage.getItem('username');
+    const storedRollNumber = localStorage.getItem('rollNumber');
+
+    if (
+        storedQuestion !== null &&
+        storedScore !== null &&
+        storedTimeTaken !== null &&
+        storedUsername !== null &&
+        storedRollNumber !== null &&
+        storedUsername !== 'N/A' &&
+        storedRollNumber !== 'N/A'
+    ) {
+        currentQuestion = parseInt(storedQuestion, 10);
+        score = parseInt(storedScore, 10);
+        const timeTakenInSeconds = parseFloat(storedTimeTaken);
+        quizStartTime = new Date(Date.now() - timeTakenInSeconds * 1000);
+        const usernameInput = document.getElementById('username');
+        const rollNumberInput = document.getElementById('rollNumber');
+
+        if (usernameInput && rollNumberInput) {
+            usernameInput.value = storedUsername;
+            rollNumberInput.value = storedRollNumber;
+        }
+
+        showQuestion();
+        return true; // Added to indicate that quiz state is loaded successfully
+    } else {
+        showStartPage();
+        return false; // Added to indicate that quiz state is not loaded
+    }
+}
+
+
+function showStartPage() {
+    // Display input fields for username and roll number before the quiz starts
+    const storedUsername = localStorage.getItem('username');
+    const storedRollNumber = localStorage.getItem('rollNumber');
+
+    const usernameInput = document.getElementById('username');
+    const rollNumberInput = document.getElementById('rollNumber');
+
+    if (!usernameInput || !rollNumberInput) {
+        console.error('Username or Roll Number input not found.');
+        return;
+    }
+
+    if (storedUsername && storedRollNumber && storedUsername !== 'N/A' && storedRollNumber !== 'N/A') {
+        // If there are stored values, set them in the input fields
+        usernameInput.value = storedUsername;
+        rollNumberInput.value = storedRollNumber;
+    }
+
+    quizContainer.innerHTML = `
+        <form id="startForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" value="${storedUsername || ''}" required />
+            <label for="rollNumber">Roll Number:</label>
+            <input type="text" id="rollNumber" value="${storedRollNumber || ''}" required />
+            <button type="button" onclick="startQuiz()">Start Quiz</button>
+        </form>
+    `;
+    checkLocalStorage(); // Add this line
 }
 
 
 function showQuestion() {
-    // Create or obtain the timeDisplay element
     let timeDisplay = document.getElementById('timeDisplay');
     if (!timeDisplay) {
         timeDisplay = document.createElement('div');
@@ -72,8 +122,17 @@ function showQuestion() {
         quizContainer.appendChild(timeDisplay);
     }
 
-    // Display the quiz questions
+    if (!questions || currentQuestion < 1 || currentQuestion > questions.length) {
+        console.error('Questions not loaded or invalid current question index.');
+        return;
+    }
+
     const questionData = questions[currentQuestion - 1];
+
+    if (!questionData) {
+        console.error('Question data not found for current question index.');
+        return;
+    }
 
     quizContainer.innerHTML = `
         <div id="timeDisplay"></div>
@@ -89,10 +148,34 @@ function showQuestion() {
         <button onclick="handleAnswer()">Next</button>
     `;
 
-    // Update the time display every second
     updateTimerDisplay();
 }
 
+function saveQuizState() {
+    localStorage.setItem('currentQuestion', currentQuestion.toString());
+    localStorage.setItem('score', score.toString());
+
+    const usernameInput = document.getElementById('username');
+    const rollNumberInput = document.getElementById('rollNumber');
+
+    const username = usernameInput ? usernameInput.value.trim() || 'N/A' : 'N/A';
+    const rollNumber = rollNumberInput ? rollNumberInput.value.trim() || 'N/A' : 'N/A';
+
+    localStorage.setItem('username', username);
+    localStorage.setItem('rollNumber', rollNumber);
+
+    const currentTime = new Date();
+    const timeTakenInSeconds = (currentTime - quizStartTime) / 1000;
+    localStorage.setItem('timeTaken', timeTakenInSeconds.toString());
+}
+
+function shuffleQuestions() {
+    questions = shuffleArray(questions);
+
+    questions.forEach(question => {
+        question.options = shuffleArray(question.options);
+    });
+}
 
 function updateTimerDisplay() {
     const timeDisplay = document.getElementById('timeDisplay');
@@ -104,10 +187,10 @@ function updateTimerDisplay() {
         const formattedTime = `${padZero(minutes)}:${padZero(seconds)}`;
 
         timeDisplay.innerText = formattedTime;
-        setTimeout(updateTimerDisplay, 1000);
     }
 }
 
+timerInterval = setInterval(updateTimerDisplay, 1000);
 
 function handleAnswer() {
     const selectedOption = document.querySelector('input[name="answer"]:checked');
@@ -117,37 +200,41 @@ function handleAnswer() {
         nextButton.disabled = true;
 
         const userAnswer = selectedOption.value;
-        const correctAnswer = questions[currentQuestion - 1].correctAnswer;
+        const currentQuestionData = questions[currentQuestion - 1];
 
-        if (userAnswer === correctAnswer) {
-            score++;
-            selectedOption.parentNode.style.color = 'green'; // Change text color to green for correct answer
+        if (currentQuestionData) {
+            const correctAnswer = currentQuestionData.correctAnswer;
+
+            if (userAnswer === correctAnswer) {
+                score++;
+                selectedOption.parentNode.style.color = 'green';
+            } else {
+                selectedOption.parentNode.style.color = 'red';
+            }
+
+            displayAnswerFeedback(userAnswer, correctAnswer);
+            currentQuestion++;
+
+            saveQuizState();
+
+            if (currentQuestion <= questions.length) {
+                setTimeout(() => {
+                    selectedOption.parentNode.style.color = '';
+                    showQuestion();
+                    nextButton.disabled = false;
+                }, 3000);
+            } else {
+                quizEndTime = new Date();
+                setTimeout(() => {
+                    selectedOption.parentNode.style.color = '';
+                    showResult();
+                }, 3000);
+            }
         } else {
-            selectedOption.parentNode.style.color = 'red'; // Change text color to red for wrong answer
-        }
-
-        displayAnswerFeedback(userAnswer, correctAnswer);
-        currentQuestion++;
-
-        if (currentQuestion <= questions.length) {
-            setTimeout(() => {
-                selectedOption.parentNode.style.color = ''; // Reset text color
-                showQuestion();
-                nextButton.disabled = false;
-            }, 3000);
-        } else {
-            quizEndTime = new Date();
-            setTimeout(() => {
-                selectedOption.parentNode.style.color = ''; // Reset text color
-                showResult();
-            }, 3000);
+            console.error('Question data not found for current question index.');
         }
     }
 }
-
-
-
-
 
 function displayAnswerFeedback(userAnswer, correctAnswer) {
     const questionData = questions[currentQuestion - 1];
@@ -159,13 +246,25 @@ function displayAnswerFeedback(userAnswer, correctAnswer) {
     `;
 }
 
+function shuffleArray(array) {
+    // Fisher-Yates shuffle algorithm
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 function showResult() {
     const totalQuestions = questions.length;
     const percentage = (score / totalQuestions) * 100;
 
-    // Retrieve the username and roll number from storage
-    const username = sessionStorage.getItem('username') || 'N/A';
-    const rollNumber = sessionStorage.getItem('rollNumber') || 'N/A';
+    const usernameInput = document.getElementById('username');
+    const rollNumberInput = document.getElementById('rollNumber');
+
+    // Check if the input fields exist before accessing their values
+    const username = currentUsername || (usernameInput ? usernameInput.value || 'N/A' : 'N/A');
+    const rollNumber = currentRollNumber || (rollNumberInput ? rollNumberInput.value || 'N/A' : 'N/A');
 
     resultContainer.innerHTML = `
         <h2>Quiz Result</h2>
@@ -177,8 +276,29 @@ function showResult() {
         <button onclick="reviewQuiz()">Review Questions</button>
     `;
     resultContainer.classList.remove('hidden');
-}
 
+    // Save the username and roll number in the localStorage with different keys
+    localStorage.setItem('reportUsername', username);
+    localStorage.setItem('reportRollNumber', rollNumber);
+
+    // Call saveQuizResultForReport before resetting values
+    saveQuizResultForReport();
+
+    // Reset quiz state and current question index
+    localStorage.removeItem('currentQuestion');
+    localStorage.removeItem('score');
+    localStorage.removeItem('timeTaken');
+    // Do not remove the username and roll number from localStorage
+
+    currentQuestion = 0;
+    score = 0;
+
+    // Clear the timer interval
+    clearInterval(timerInterval);
+
+    // Call checkLocalStorage again to ensure the correct values are printed
+    checkLocalStorage();
+}
 
 
 function calculateTimeTaken() {
@@ -190,14 +310,9 @@ function calculateTimeTaken() {
     return `${padZero(minutes)}:${padZero(seconds)}`;
 }
 
-
-
 function padZero(value) {
     return value < 10 ? `0${value}` : value;
 }
-
-
-
 
 function reviewQuiz() {
     resultContainer.innerHTML += `
@@ -214,5 +329,51 @@ function reviewQuiz() {
     resultContainer.querySelector('.review-container').classList.remove('hidden');
 }
 
+function checkLocalStorage() {
+    const storedUsername = localStorage.getItem('username');
+    const storedRollNumber = localStorage.getItem('rollNumber');
+    console.log('Stored Username in checkLocalStorage:', storedUsername);
+    console.log('Stored Roll Number in checkLocalStorage:', storedRollNumber);
+}
 
-startQuiz();
+
+
+function saveQuizResultForReport() {
+    const reportUsername = localStorage.getItem('reportUsername') || 'N/A';
+    const reportRollNumber = localStorage.getItem('reportRollNumber') || 'N/A';
+    const totalQuestions = questions.length;
+    const attemptedQuestions = currentQuestion - 1 >= 0 ? currentQuestion - 1 : 0;
+    const correctAnswers = score >= 0 ? score : 0;
+    const wrongAnswers = attemptedQuestions - correctAnswers >= 0 ? attemptedQuestions - correctAnswers : 0;
+
+    // Store username and rollNumber in localStorage
+    localStorage.setItem('reportUsername', reportUsername);
+    localStorage.setItem('reportRollNumber', reportRollNumber);
+
+    const quizResultData = {
+        name: reportUsername,
+        rollNumber: reportRollNumber,
+        totalQuestions: totalQuestions,
+        attemptedQuestions: attemptedQuestions,
+        correctAnswers: correctAnswers,
+        wrongAnswers: wrongAnswers
+    };
+
+    const existingData = getQuizReportData();
+    existingData.push(quizResultData);
+
+    localStorage.setItem('QuizResultReportDataSet', JSON.stringify(existingData));
+}
+
+function logout() {
+    // Clear login data
+    localStorage.removeItem('quizResultLogin');
+
+    // Show the login section and hide the quiz report section
+    document.getElementById('loginSection').style.display = 'block';
+    document.getElementById('quizReportSection').style.display = 'none';
+}
+
+
+checkLocalStorage();
+showStartPage(); // Call showStartPage on page load

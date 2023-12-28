@@ -6,18 +6,18 @@ let questions = JSON.parse(localStorage.getItem('questions')) || [];
 // If not, initialize with default questions
 if (questions.length === 0) {
     questions = [
-    {
-        question: "What does CPU stand for?",
-        options: ["Central Processing Unit", "Computer Personal Unit", "Central Processor Unit", "Central Process Unit"],
-        correctAnswer: "Central Processing Unit",
-        explanation: "The CPU, or Central Processing Unit, is the primary component that performs calculations and executes instructions in a computer."
-    },
-    {
-        question: "Which component is known as the brain of the computer?",
-        options: ["RAM", "Hard Drive", "CPU", "Motherboard"],
-        correctAnswer: "CPU",
-        explanation: "The CPU (Central Processing Unit) is often referred to as the brain of the computer because it processes instructions and performs calculations."
-    },
+        {
+            question: "What does CPU stand for?",
+            options: ["Central Processing Unit", "Computer Personal Unit", "Central Processor Unit", "Central Process Unit"],
+            correctAnswer: "Central Processing Unit",
+            explanation: "The CPU, or Central Processing Unit, is the primary component that performs calculations and executes instructions in a computer."
+        },
+        {
+            question: "Which component is known as the brain of the computer?",
+            options: ["RAM", "Hard Drive", "CPU", "Motherboard"],
+            correctAnswer: "CPU",
+            explanation: "The CPU (Central Processing Unit) is often referred to as the brain of the computer because it processes instructions and performs calculations."
+        },/*
     {
         question: "What does RAM stand for?",
         options: ["Random Access Memory", "Read-Only Memory", "Real-time Access Memory", "Random Antivirus Memory"],
@@ -65,11 +65,11 @@ if (questions.length === 0) {
         options: ["HDMI", "Ethernet", "USB", "VGA"],
         correctAnswer: "USB",
         explanation: "USB (Universal Serial Bus) is a common communication port used to connect external devices, such as printers, keyboards, and storage devices, to a computer."
-    },
-];
+    },*/
+    ];
 
-// Save default questions to localStorage
-localStorage.setItem('questions', JSON.stringify(questions));
+    // Save default questions to localStorage
+    localStorage.setItem('questions', JSON.stringify(questions));
 }
 
 // Ensure that these questions are accessible globally

@@ -1,6 +1,7 @@
 <!-- QuestionEditor.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,18 +11,20 @@
         /* Add your CSS styles here */
     </style>
 </head>
+
 <body>
     <div class="MenuOptions">
         <a href="index.html">Quiz</a>
         <a href="questioneditor.html">Quiz Editor</a>
-        <a href="QuizResult.html">Quiz Result</a>
+        <a href="QuizReport.html">Quiz Result</a>
+        <a onclick="logout()">Logout</a>
     </div>
     <!-- Login Section -->
     <div id="loginSection" class="login-container" style="display: block; text-align: center; margin-top: 100px;">
         <h2 id="loginh2">Login</h2>
         <label for="username" id="usernamelabel">Username:</label>
         <input type="text" id="username" required>
-    
+
         <label for="pin" id="pinlabel">PIN:</label>
         <input type="password" id="pin" required>
 
@@ -32,42 +35,43 @@
     <div id="questionEditorSection" style="display: none;">
         <h1>Question Editor</h1>
         <form id="questionForm">
-        <label for="question">Question:</label>
-        <input type="text" id="question" required>
-    
-        <label for="options">Options (comma-separated):</label>
-        <input type="text" id="options" required>
-    
-        <label for="correctAnswer">Correct Answer:</label>
-        <input type="text" id="correctAnswer" required>
-    
-        <label for="explanation">Explanation:</label>
-        <textarea id="explanation" required></textarea>
-    
-        <button type="button" onclick="addQuestion()">Add Question</button>
-        <button type="button" onclick="updateQuestion()">Update Question</button>
-        <button type="button" onclick="deleteQuestion()">Delete Question</button>
-    </form>
+            <label for="question">Question:</label>
+            <input type="text" id="question" required>
 
-    <!-- Table to display questions -->
-    <h2>Question List</h2>
-    <table id="questionTable">
-        <thead>
-            <tr>
-                <th>Question</th>
-                <th>Options</th>
-                <th>Correct Answer</th>
-                <th>Explanation</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="questionTableBody">
-            <!-- Table body will be dynamically populated -->
-        </tbody>
-    </table>
+            <label for="options">Options (comma-separated):</label>
+            <input type="text" id="options" required>
 
-    <!-- Scripts -->
-    <script src="questions.js"></script>
-    <script src="questioneditor.js"></script>
+            <label for="correctAnswer">Correct Answer:</label>
+            <input type="text" id="correctAnswer" required>
+
+            <label for="explanation">Explanation:</label>
+            <textarea id="explanation" required></textarea>
+
+            <button type="button" onclick="addQuestion()">Add Question</button>
+            <button type="button" onclick="updateQuestion()">Update Question</button>
+            <button type="button" onclick="deleteQuestion()">Delete Question</button>
+        </form>
+
+        <!-- Table to display questions -->
+        <h2>Question List</h2>
+        <table id="questionTable">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Options</th>
+                    <th>Correct Answer</th>
+                    <th>Explanation</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="questionTableBody">
+                <!-- Table body will be dynamically populated -->
+            </tbody>
+        </table>
+
+        <!-- Scripts -->
+        <script src="questions.js"></script>
+        <script src="questioneditor.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="QuizReport.css">
+    <title>Quiz Result</title>
+</head>
+
+<body>
+    <!-- Login Section -->
+    <div id="loginSection">
+        <h1>Login to View Quiz Result</h1>
+        <form>
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+            <label for="pin">PIN:</label>
+            <input type="password" id="pin" required>
+            <button type="button" onclick="login()">Login</button>
+        </form>
+    </div>
+
+    <div id="quizReportSection" style="display: none;">
+        <h1>Quiz Report</h1>
+        <!-- Display Quiz Report Table Here -->
+        <table id="quizReportTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Roll Number</th>
+                    <th>Total Questions</th>
+                    <th>Attempted Questions</th>
+                    <th>Correct Answers</th>
+                    <th>Wrong Answers</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div id="csvExport">
+            <a id="exportCsvLink" href="#" onclick="exportCsv()">Export as CSV</a>
+        </div>
+    </div>
+
+    <!-- Menu Options -->
+    <div class="MenuOptions">
+        <a href="index.html">Quiz</a>
+        <a href="questioneditor.html">Quiz Editor</a>
+        <a href="QuizReport.html">Quiz Result</a>
+        <a onclick="logout()">Logout</a>
+    </div>
+
+    <!-- Include QuizReport.js first -->
+    <script src="QuizReport.js"></script>
+
+    <!-- Then include Quiz.js -->
+    <script src="Quiz.js"></script>
+</body>
+
+</html>
